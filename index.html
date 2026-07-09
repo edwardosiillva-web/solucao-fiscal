@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solução Fiscal — Regularização e Gestão Tributária</title>
+<meta name="description" content="Emissão de notas fiscais, parcelamento do Simples Nacional e MEI, regularização fiscal e consultoria tributária.">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --azul: #0a3d62;
+    --azul-claro: #1e6091;
+    --verde: #2e8b57;
+    --dourado: #f0a500;
+    --cinza: #f4f6f8;
+    --texto: #333;
+  }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; color: var(--texto); line-height: 1.6; }
+  a { text-decoration: none; color: inherit; }
+
+  /* Header */
+  header {
+    background: var(--azul);
+    color: #fff;
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .logo { font-size: 1.5rem; font-weight: bold; }
+  .logo span { color: var(--dourado); }
+  nav ul { list-style: none; display: flex; gap: 20px; flex-wrap: wrap; }
+  nav a { color: #fff; font-size: 0.95rem; transition: color 0.3s; }
+  nav a:hover { color: var(--dourado); }
+
+  /* Banner */
+  .banner {
+    background: linear-gradient(rgba(10,61,98,0.85), rgba(10,61,98,0.85)),
+                url('https://images.unsplash.com/photo-1554224155-6723518e7b1b?w=1600') center/cover;
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px;
+  }
+  .banner h1 { font-size: 2.8rem; margin-bottom: 15px; }
+  .banner p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px; }
+  .btn {
+    display: inline-block;
+    background: var(--dourado);
+    color: var(--azul);
+    padding: 14px 36px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+
+  /* Seções gerais */
+  section { padding: 70px 20px; max-width: 1100px; margin: 0 auto; }
+  section h2 { text-align: center; color: var(--azul); font-size: 2rem; margin-bottom: 40px; }
+
+  /* Sobre */
+  #sobre { background: var(--cinza); max-width: 100%; }
+  #sobre .conteudo { max-width: 800px; margin: 0 auto; text-align: center; }
+  #sobre p { margin-bottom: 15px; font-size: 1.05rem; }
+
+  /* Serviços */
+  .grid-servicos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+  }
+  .servico {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 30px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .servico:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+  .servico h3 { color: var(--azul-claro); margin-bottom: 10px; font-size: 1.2rem; }
+  .servico .icone { font-size: 2rem; margin-bottom: 12px; }
+
+  /* Como funciona */
+  #como-funciona { background: var(--cinza); max-width: 100%; }
+  #como-funciona .conteudo { max-width: 800px; margin: 0 auto; }
+  .passo {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+    align-items: flex-start;
+  }
+  .passo .numero {
+    background: var(--azul);
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+  .passo h4 { color: var(--azul); margin-bottom: 5px; }
+
+  /* Benefícios */
+  .grid-beneficios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  .beneficio {
+    text-align: center;
+    padding: 25px;
+    border-radius: 10px;
+    background: var(--cinza);
+  }
+  .beneficio .icone { font-size: 2.5rem; margin-bottom: 12px; }
+  .beneficio h4 { color: var(--azul); margin-bottom: 8px; }
+
+  /* FAQ */
+  #faq .conteudo { max-width: 800px; margin: 0 auto; }
+  .faq-item { margin-bottom: 15px; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; }
+  .faq-item summary {
+    padding: 18px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--azul);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: '+'; font-size: 1.5rem; color: var(--dourado); }
+  .faq-item[open] summary::after { content: '−'; }
+  .faq-item p { padding: 0 20px 18px; }
+
+  /* Contato */
+  #contato { background: var(--cinza); max-width: 100%; }
+  #contato .conteudo { max-width: 600px; margin: 0 auto; }
+  form { display: flex; flex-direction: column; gap: 15px; }
+  input, textarea, select {
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  input:focus, textarea:focus, select:focus { outline: 2px solid var(--azul-claro); border-color: transparent; }
+  form button {
+    background: var(--azul);
+    color: #fff;
+    border: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  form button:hover { background: var(--azul-claro); }
+  .email-contato { text-align: center; margin-top: 25px; }
+  .email-contato a { color: var(--azul); font-weight: bold; }
+
+  /* WhatsApp flutuante */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    z-index: 200;
+    transition: transform 0.3s;
+  }
+  .whatsapp-float:hover { transform: scale(1.1); }
+  .whatsapp-float svg { width: 35px; height: 35px; fill: #fff; }
+
+  /* Footer */
+  footer {
+    background: var(--azul);
+    color: #fff;
+    padding: 40px 20px 20px;
+  }
+  .footer-conteudo {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+  }
+  .footer-conteudo h4 { margin-bottom: 12px; color: var(--dourado); }
+  .footer-conteudo p, .footer-conteudo a { font-size: 0.9rem; line-height: 1.8; }
+  .footer-conteudo a { color: #fff; }
+  .footer-conteudo a:hover { text-decoration: underline; }
+  .copyright { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.85rem; }
+
+  @media (max-width: 600px) {
+    .banner h1 { font-size: 1.8rem; }
+    .banner p { font-size: 1rem; }
+    nav ul { gap: 10px; }
+    nav a { font-size: 0.85rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Solução<span> Fiscal</span></div>
+  <nav>
+    <ul>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#como-funciona">Como Funciona</a></li>
+      <li><a href="#beneficios">Benefícios</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="banner">
+  <h1>Sua regularização fiscal em um só lugar</h1>
+  <p>Emissão de notas fiscais, parcelamento de tributos, regularização e consultoria tributária. Tudo de forma simples e segura.</p>
+  <a href="#contato" class="btn">Fale com um especialista</a>
+</section>
+
+<section id="sobre">
+  <div class="conteudo">
+    <h2>Quem Somos</h2>
+    <p>A <strong>Solução Fiscal</strong> é uma empresa especializada em regularização e gestão tributária, dedicada a ajudar microempreendedores, MEIs e pequenas empresas a cumprirem suas obrigações fiscais sem complicação.</p>
+    <p><strong>Nossa missão:</strong> descomplicar a burocracia tributária, oferecendo soluções práticas, ágeis e personalizadas para que cada cliente fique em dia com o fisco e possa focar no que realmente importa — crescer o próprio negócio.</p>
+    <p>Com uma equipe experiente e comprometida, acompanhamos cada etapa do processo, garantindo segurança, transparência e total conformidade com a legislação vigente.</p>
+  </div>
+</section>
+
+<section id="servicos">
+  <h2>Nossos Serviços</h2>
+  <div class="grid-servicos">
+    <div class="servico">
+      <div class="icone">🧾</div>
+      <h3>Emissão de Notas Fiscais</h3>
+      <p>Emissão de NF-e e NFS-e para serviço e comércio, com configuração correta de tributos e CNPJ.</p>
+    </div>
+    <div class="servico">
+      <div class="icone">📋</div>
+      <h3>Levantamento de Débitos Fiscais</h3>
+      <p>Identificamos todos os débitos pendentes junto à Receita Federal, estadual e municipal, com relatório completo.</p>
+    </div>
+    <div class="servico">
+      <div class="icone">📑</div>
+      <h3>Parcelamento do Simples Nacional</h3>
+      <p>Parcelamento de débitos do Simples Nacional com negociação adequada ao seu fluxo de caixa.</p>
+    </div>
+    <div class="servico">
+      <div class="icone">🏪</div>
+      <h3>Parcelamento do MEI</h3>
+      <p>Regularização das guias DME atrasadas do MEI e parcelamento direto no portal do empreendedor.</p>
+    </div>
+    <div class="servico">
+      <div class="icone">✅</div>
+      <h3>Regularização Fiscal</h3>
+      <p>Tratamos pendências, certidões negativas e regularização de situação cadastral junto aos órgãos competentes.</p>
+    </div>
+    <div class="servico">
+      <div class="icone">💼</div>
+      <h3>Consultoria e Suporte Tributário</h3>
+      <p>Assessoria contínua em tributos, regimes de tributação e planejamento fiscal para sua empresa.</p>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona">
+  <div class="conteudo">
+    <h2>Como Funciona</h2>
+    <div class="passo">
+      <div class="numero">1</div>
+      <div>
+        <h4>Contato inicial</h4>
+        <p>Você nos chama no WhatsApp ou preenche o formulário. Entendemos sua situação e necessidades fiscais.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="numero">2</div>
+      <div>
+        <h4>Análise e diagnóstico</h4>
+        <p>Fazemos um levantamento completo dos débitos e pendências, identificando o melhor caminho para regularização.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="numero">3</div>
+      <div>
+        <h4>Proposta personalizada</h4>
+        <p>Apresentamos um plano de ação com prazos e custos transparentes, adequado ao seu orçamento.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="numero">4</div>
+      <div>
+        <h4>Execução</h4>
+        <p>Damos entrada nos protocolos, emissões e parcelamentos junto aos órgãos competentes, acompanhando cada etapa.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="numero">5</div>
+      <div>
+        <h4>Regularização concluída</h4>
+        <p>Entregamos os documentos e comprovantes. Você fica em dia com o fisco e recebe suporte contínuo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="beneficios">
+  <h2>Por que contratar a Solução Fiscal</h2>
+  <div class="grid-beneficios">
+    <div class="beneficio">
+      <div class="icone">⚡</div>
+      <h4>Agilidade</h4>
+      <p>Processos rápidos, sem burocracia desnecessária. Você economiza tempo.</p>
+    </div>
+    <div class="beneficio">
+      <div class="icone">🔒</div>
+      <h4>Segurança</h4>
+      <p>Sigilo total dos seus dados e cumprimento estrito da legislação.</p>
+    </div>
+    <div class="beneficio">
+      <div class="icone">💰</div>
+      <h4>Economia</h4>
+      <p>Evite multas e juros. Negociação que cabe no seu orçamento.</p>
+    </div>
+    <div class="beneficio">
+      <div class="icone">🎯</div>
+      <h4>Especialização</h4>
+      <p>Equipe focada exclusivamente em regularização e tributação.</p>
+    </div>
+    <div class="beneficio">
+      <div class="icone">🤝</div>
+      <h4>Atendimento próximo</h4>
+      <p>Suporte humano e personalizado do primeiro contato à conclusão.</p>
+    </div>
+    <div class="beneficio">
+      <div class="icone">📈</div>
+      <h4>Resultado garantido</h4>
+      <p>Acompanhamento até a emissão das certidões e quitação total.</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="conteudo">
+    <h2>Perguntas Frequentes</h2>
+    <details class="faq-item">
+      <summary>Posso parcelar meus débitos mesmo estando muito atrasado?</summary>
+      <p>Sim. A maioria dos órgãos permite parcelamento mesmo com longo atraso. Avaliamos sua situação e propomos a melhor condição dentro do que a legislação permite.</p>
+    </details>
+    <details class="faq-item">
+      <summary>MEI precisa emitir nota fiscal?</summary>
+      <p>O MEI é dispensado de emissão de nota fiscal para consumidor final (pessoa física), mas é obrigado a emitir para pessoa jurídica. Configuramos seu sistema de emissão conforme a atividade.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Quanto tempo leva a regularização?</summary>
+      <p>Depende do tipo e volume de pendências. Casos simples são resololvidos em poucos dias; regularizações mais complexas podem levar semanas. Informamos o prazo no diagnóstico inicial.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Vocês emitem notas para comércio e serviço?</summary>
+      <p>Sim. Trabalhamos tanto com NF-e (comércio/varejo) quanto NFS-e (prestação de serviços), de acordo com a atividade da sua empresa e o município.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Preciso ter contador para usar os serviços?</summary>
+      <p>Não necessariamente. Atendemos tanto empresas com contador quanto aquelas que precisam de suporte pontual em questões fiscais específicas.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Como são cobrados os serviços?</summary>
+      <p>Os valores variam conforme o serviço e a complexidade do caso. Oferecemos orçamento gratuito após a análise inicial, sem compromisso.</p>
+    </details>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="conteudo">
+    <h2>Fale Conosco</h2>
+    <form action="https://formsubmit.co/seu-email@exemplo.com" method="POST">
+      <input type="hidden" name="_subject" value="Novo contato pelo site Solução Fiscal">
+      <input type="text" name="nome" placeholder="Nome completo" required>
+      <input type="email" name="email" placeholder="Seu e-mail" required>
+      <input type="tel" name="telefone" placeholder="Telefone / WhatsApp" required>
+      <select name="servico" required>
+        <option value="">Selecione o serviço desejado</option>
+        <option>Emissão de Notas Fiscais</option>
+        <option>Levantamento de Débitos</option>
+        <option>Parcelamento do Simples Nacional</option>
+        <option>Parcelamento do MEI</option>
+        <option>Regularização Fiscal</option>
+        <option>Consultoria Tributária</option>
+        <option>Outro</option>
+      </select>
+      <textarea name="mensagem" rows="4" placeholder="Conte-nos brevemente sua situação" required></textarea>
+      <button type="submit">Enviar mensagem</button>
+    </form>
+    <div class="email-contato">
+      <p>Prefere e-mail? Escreva para <a href="mailto:contato@solucaofiscal.com.br">contato@solucaofiscal.com.br</a></p>
+    </div>
+  </div>
+</section>
+
+<a href="https://wa.me/5500000000000?text=Olá!%20Vim%20pelo%20site%20da%20Solução%20Fiscal" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<footer>
+  <div class="footer-conteudo">
+    <div>
+      <h4>Solução Fiscal</h4>
+      <p>Regularização e gestão tributária para MEIs, microempreendedores e pequenas empresas.</p>
+    </div>
+    <div>
+      <h4>Contato</h4>
+      <p>📞 (00) 0000-0000</p>
+      <p>📱 WhatsApp: (00) 00000-0000</p>
+      <p>✉️ <a href="mailto:contato@solucaofiscal.com.br">contato@solucaofiscal.com.br</a></p>
+    </div>
+    <div>
+      <h4>Atendimento</h4>
+      <p>Segunda a Sexta: 8h às 18h</p>
+      <p>Sábado: 8h às 12h</p>
+    </div>
+    <div>
+      <h4>Navegação</h4>
+      <p><a href="#sobre">Sobre</a></p>
+      <p><a href="#servicos">Serviços</a></p>
+      <p><a href="#contato">Contato</a></p>
+    </div>
+  </div>
+  <div class="copyright">
+    © 2026 Solução Fiscal. Todos os direitos reservados.
+  </div>
+</footer>
+
+</body>
+</html>
